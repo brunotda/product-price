@@ -2,8 +2,9 @@ import React from 'react'
 import { defineMessages, FormattedNumber } from 'react-intl'
 import { useProduct } from 'vtex.product-context'
 import { FormattedCurrency } from 'vtex.format-currency'
+import { FormattedPrice } from 'vtex.formatted-price'
 import { IOMessageWithMarkers } from 'vtex.native-types'
-import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
+import { useCssHandles, CssHandlesTypes, applyModifiers } from 'vtex.css-handles'
 
 import { getDefaultSeller } from './modules/seller'
 import { hideProductPrice } from './modules/hideProductPrice'
@@ -11,6 +12,7 @@ import { hideProductPrice } from './modules/hideProductPrice'
 const CSS_HANDLES = [
   'sellingPrice',
   'sellingPriceValue',
+  'sellingPriceValueFormatted',
   'sellingPriceWithTax',
   'sellingPriceWithUnitMultiplier',
   'taxPercentage',
@@ -100,6 +102,11 @@ function SellingPrice({
           sellingPriceValue: (
             <span key="sellingPriceValue" className={handles.sellingPriceValue}>
               <FormattedCurrency value={sellingPriceValue} />
+            </span>
+          ),
+          sellingPriceValueFormatted: (
+            <span key="sellingPriceValueFormatted" className={`${handles.sellingPriceValue}  ${applyModifiers(handles.sellingPriceValue, sellingPriceValue === 0 ? "gift" : "")}`}>
+              <FormattedPrice value={sellingPriceValue} />
             </span>
           ),
           sellingPriceWithTax: (

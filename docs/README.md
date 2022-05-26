@@ -199,6 +199,7 @@ In addition to that, keep in mind the message variables for each block since you
 | Message variable | Type | Description |
 | --- | --- | --- |
 | `sellingPriceValue` | `string` | Selling price value. |
+| `sellingPriceValueFormatted` | `string` | Selling price value with FormattedPrice. |
 | `sellingPriceWithTax` | `string` | Selling price with tax. |
 | `sellingPriceWithUnitMultiplier` | `string` | Selling price multiplied by unit multiplier. |
 | `taxPercentage` | `string` | Tax percentage. |
