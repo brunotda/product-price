@@ -4,7 +4,11 @@ import { useProduct } from 'vtex.product-context'
 import { FormattedCurrency } from 'vtex.format-currency'
 import { FormattedPrice } from 'vtex.formatted-price'
 import { IOMessageWithMarkers } from 'vtex.native-types'
-import { useCssHandles, CssHandlesTypes, applyModifiers } from 'vtex.css-handles'
+import {
+  useCssHandles,
+  CssHandlesTypes,
+  applyModifiers,
+} from 'vtex.css-handles'
 
 import { getDefaultSeller } from './modules/seller'
 import { hideProductPrice } from './modules/hideProductPrice'
@@ -67,8 +71,12 @@ function SellingPrice({
     return null
   }
 
-  const sellingPriceValue = commercialOffer.Price
-  const listPriceValue = commercialOffer.ListPrice
+  const sellingPriceValue =
+    commercialOffer.Price <= 0.01 ? 0 : commercialOffer.Price
+
+  const listPriceValue =
+    commercialOffer.ListPrice <= 0.01 ? 0 : commercialOffer.ListPrice
+
   const { taxPercentage } = commercialOffer
   const sellingPriceWithTax =
     sellingPriceValue + sellingPriceValue * taxPercentage
@@ -105,7 +113,13 @@ function SellingPrice({
             </span>
           ),
           sellingPriceValueFormatted: (
-            <span key="sellingPriceValueFormatted" className={`${handles.sellingPriceValue}  ${applyModifiers(handles.sellingPriceValue, sellingPriceValue === 0 ? "gift" : "")}`}>
+            <span
+              key="sellingPriceValueFormatted"
+              className={`${handles.sellingPriceValue}  ${applyModifiers(
+                handles.sellingPriceValue,
+                sellingPriceValue === 0 ? 'gift' : ''
+              )}`}
+            >
               <FormattedPrice value={sellingPriceValue} />
             </span>
           ),

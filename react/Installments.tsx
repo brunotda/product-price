@@ -51,7 +51,8 @@ function Installments({
 
   if (
     !commercialOffer?.Installments ||
-    commercialOffer?.Installments?.length === 0
+    commercialOffer?.Installments?.length === 0 ||
+    commercialOffer.Price <= 0.01
   ) {
     return null
   }
